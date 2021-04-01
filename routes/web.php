@@ -14,13 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/welcome/{id}/{expires}', 'Site\SpaController@index')->name('welcome.app');
+Route::post('/email/verify', 'Admin\VerificationController@verify')->name('verificationapi.verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
